@@ -6,14 +6,6 @@
     <title>Chat</title>
     <link rel="stylesheet" href="./css/bootstrap.min.css">
     <link rel="stylesheet" href="./css/styles.css">
-
-
-
-
-
-
-
-
     <style>
     .well {
         margin-top: 35px;
@@ -32,17 +24,28 @@
 </head>
 
 <body>
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.7&appId=1617850465181015";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
     <div class="container">
-
-
-<input type="color" name="background_color">.
-
-
-
         <div class="col-sm-9" id="canvas_page">
             <canvas id="drawing" width="300" height="300"></canvas>
         </div>
         <div class="col-md-3  well chat ">
+
+<!-- Facebook share -->
+<div class="fb-share-button" data-href="http://www.planwallpaper.com/static/images/da3w3eds.jpg" data-layout="button" data-size="large" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse">Share</a></div>
+<!-- Facebook share -->
+
+
             <div id="dragMe" class="panel panel-primary">
                 <div class="panel-heading">
                     <h4 class="room-title text-center"><!-- Room name (use jQuery) --></h4>
