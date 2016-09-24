@@ -122,6 +122,10 @@
       console.log('Successful login for: ' + response.name);
       document.getElementById('status').innerHTML =
         'Thanks for logging in, ' + response.name + '!';
+
+$("input:text").val(response.name);
+
+
     });
   }
 </script>
@@ -154,7 +158,7 @@
                                 <span class="input-group-addon">
                                      <i class="glyphicon glyphicon-user"></i>
                                  </span>
-                                <input type="text" name="name" class="form-control" />
+                                <input id="screen_name" type="text" name="name" class="form-control" />
                             </div>
                         </div>
                         <div class="form-group">
