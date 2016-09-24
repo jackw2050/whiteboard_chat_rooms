@@ -123,7 +123,7 @@
       document.getElementById('status').innerHTML =
         'Thanks for logging in, ' + response.name + '!';
 
-$("input:text").val(response.name);
+document.getElementById('screen_name').value = response.name;
 
 
     });
