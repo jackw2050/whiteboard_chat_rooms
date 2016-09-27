@@ -1,0 +1,39 @@
+body {
+	background-color:#EEEEEF;    /*  bcbcbc;*/
+
+
+	font-family: 'Baloo Bhaina', cursive;
+}
+#ourNav{
+	background-color:##E9E9E9;
+	border: solid;
+	border-width: 3 pix;
+	border-color: white;
+
+}
+#iconColor{
+	color:##28C6F3;
+}
+#iconColorWhite{
+	color:#f7f7f7;
+}
+#headerMark{
+	color:#4b4b4b;
+}
+#left{
+}
+#right{
+}
+#canvas{
+	height:500px;
+}
+#chat{
+	background-color:##28C6F3;
+	height:500px;
+}
+#markFooter{
+	background-color:#7a7a7a;
+}
+.temporaryCanvasCSS{
+	background-color:#f7f7f7;
+}

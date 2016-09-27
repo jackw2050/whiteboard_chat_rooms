@@ -9,6 +9,24 @@
     <style>
     .well {
         margin-top: 35px;
+        border: solid;
+        border-color: #E9E9E9;
+    }
+    
+    .label {
+        color: #518DBF;
+    }
+    
+    #primaryToolbar {
+        background-color: #E9E9E9;
+        border: 2px solid white;
+        border-radius: 12px;
+    }
+    
+    #secondaryToolbar {
+        background-color: #E9E9E9;
+        border: 2px solid white;
+        border-radius: 12px;
     }
     
     .messages {
@@ -18,77 +36,181 @@
     
     #canvas_page {
         border: solid;
-        border-color: blue;
+        border-color: #E9E9E9;
     }
     </style>
 </head>
 
 <body>
-<div id="fb-root"></div>
-<script>(function(d, s, id) {
-  var js, fjs = d.getElementsByTagName(s)[0];
-  if (d.getElementById(id)) return;
-  js = d.createElement(s); js.id = id;
-  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.7&appId=1617850465181015";
-  fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));</script>
-
-
-
-    <div class="container">
-    <div class="col-sm-12">
-        <input type="color" name="background_color">
-    </div>
-        <div class="col-sm-9" id="canvas_page">
-            <canvas id="drawing" width="300" height="300"></canvas>
-        </div>
-        <div class="col-md-3  well chat ">
-
-<!-- Facebook share -->
-<div class="fb-share-button" data-href="http://www.planwallpaper.com/static/images/da3w3eds.jpg" data-layout="button" data-size="large" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse">Share</a></div>
-<!-- Facebook share -->
-
-
-            <div id="dragMe" class="panel panel-primary">
-                <div class="panel-heading">
-                    <h4 class="room-title text-center"><!-- Room name (use jQuery) --></h4>
+    <header>
+        <div id="primaryToolbar" class="col-sm-12">
+            <div id="divToolbarMain" class="toolbar">
+                <div id="groupBackground" class="group" style="margin-left: 15px">
+                    <div class="col-xs-1">
+                        <a id="btnBlankCanvas" href="javascript:void(null);" target="framePop" title="Open a blank canvas" onclick="if (toolStrip.confirmClear()){sendLoad('', whiteboard.DocModes.Whiteboard);sendDocMode(whiteboard.DocModes.Whiteboard);}" class="selected">
+                            <img src="https://www.twiddla.com/images/toolbar/toolbar-canvas.png" style="margin-right:-5px;">
+                            <div>Whiteboard</div>
+                        </a>
+                    </div>
+                    <div class="col-xs-1">
+                        <a id="btnLoadImage" href="https://www.twiddla.com/AddIns/NewSessionIntro.aspx?checksum=&amp;sessionID=1#image" target="framePop" title="Open an Image" onclick="openPop();" class="">
+                            <img src="https://www.twiddla.com/images/toolbar/toolbar-media.png" style="margin-right:-5px;">
+                            <div>Image</div>
+                        </a>
+                    </div>
+                    <script>
+                    toolStrip.DocModeButtons = ["btnBlankCanvas", "btnWebPage", "btnLoadDocument", "btnLoadImage", "btnEtherpad"];
+                    for (var a = 0; a < toolStrip.DocModeButtons.length; a++) {
+                        toolStrip.DocModeButtons[a] = document.getElementById(toolStrip.DocModeButtons[a]);
+                    }
+                    </script>
                 </div>
-                <div class="panel-body">
-                    <div class="messages">
-                        <!-- Messages end up here! -->
-                    </div>
-                    <br>
-                    <form id="message-form">
-                        <div class="form-group">
-                            <div class="input-group">
-                                <span class="input-group-addon">
-                                    <i class="glyphicon glyphicon-comment"></i>
-                                </span>
-                                <input type="text" name="message" placeholder="Message" class="form-control" />
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <input type="submit" class="btn btn-primary btn-block" />
-                        </div>
-                    </form>
-                    <div class="pannel-footer">
-                        <a id="invite" href="/index.html" class="text-center">
-                            <p class="text-center">Invite a friend</p>
-                        </a>
-                        <a href="/index.html">
-                            <p class="text-center">Exit Room</p>
-                        </a>
-                        <!--  Link should open new tab for email or SMS invite -->
-                    </div>
+                <div id="groupTools" class="group col-xs-1">
+                    <a id="btnTools" href="javascript:setDrawMode(DrawModes.None);" title="Browse: For clicking links" onclick="setDrawMode(DrawModes.None);closePop();return false;" class="">
+                        <img src="https://www.twiddla.com/images/toolbar/toolbar-browse.png" style="margin-right:-5px;">
+                        <div>Browse</div>
+                    </a>
+                    <!--         <a id="btnLabels" href="javascript:void(null);" style="padding-left: 6px;" title="Move: Drag stuff onto the page" onclick="setDrawMode(DrawModes.Move);closePop();return false;" class="">
+            <img src="https://www.twiddla.com/images/toolbar/toolbar-select.png">
+            <div>Select</div>
+        </a> -->
+                </div>
+                <div class="group col-xs-1">
+                    <a id="btnPLine" href="javascript:setDrawMode(DrawModes.PLine, null);" title="Pencil Tool" onclick="setDrawMode(DrawModes.PLine, null);return false;" class="selected">
+                        <img src="https://www.twiddla.com/images/toolbar/toolbar-draw.png">
+                        <div>Draw</div>
+                    </a>
+                </div>
+                <div class="group col-xs-1">
+                    <a id="btnErase" href="javascript:setDrawMode(DrawModes.Erase, null);" title="Erase" onclick="setDrawMode(DrawModes.Erase, null);return false;" class="">
+                        <img src="https://www.twiddla.com/images/toolbar/toolbar-witeout2.png">
+                        <div>Erase</div>
+                    </a>
+                </div>
+                <div class="group col-xs-1">
+                    <a id="btnText" href="javascript:setDrawMode(DrawModes.Text);" style="padding-left: 9px; padding-right: 7px" title="Text: For adding and editing text" onclick="setDrawMode(DrawModes.Text);closePop();return false;" class="">
+                        <img src="https://www.twiddla.com/images/toolbar/toolbar-text.png">
+                        <div style="margin-right: 2px;">Text</div>
+                    </a>
+                </div>
+                <div class="group col-xs-1">
+                    <a id="btnShapshot" href="https://www.twiddla.com/AddIns/SnapshotPanel.aspx?checksum=&amp;sessionID=1" title="Save a Snapshot" target="framePop" onclick="openPop();MediaTab_init();">
+                        <img src="https://www.twiddla.com/images/toolbar/toolbar-save.png">
+                        <div>Save…</div>
+                    </a>
                 </div>
             </div>
         </div>
-        <script src="/js/client.js"></script>
-        <script src="/js/jquery-2.1.4.min.js"></script>
-        <script src="/js/socket.io-1.3.7.js"></script>
-        <script src="/js/moment.js"></script>
-        <script src="/js/QueryParams.js"></script>
-        <script src="/js/app.js"></script>
+    </header>
+    <div id="fb-root"></div>
+    <script>
+    (function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s);
+        js.id = id;
+        js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.7&appId=1617850465181015";
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+    </script>
+    <div></div>
+    <br>
+    <div class="col-sm-12">
+        <div id="background-color" class="row">
+            <div id="secondaryToolbar" class="col-sm-12">
+                <!--  <p id="color_value">Select new drawing color</p> -->
+                <!-- Color picker -->
+                <div class="label">
+                    Drawing options
+                </div>
+                <div class="label">
+                    Brush color:
+                </div>
+                <input type="color" value="#ff0000" onchange="javascript:document.getElementById('chosen-color').value = document.getElementById('background-color').value;">
+                <input id="chosen-color" type="text" readonly="" value="#ff0000">
+                <!-- Color picker -->
+                <div class="label">
+                    Line:
+                </div>
+                <a href="javascript:void(null);" alt="Pen Size: 1px" title="Pen Size: 1px" onclick="sendPenSize(1);toolStrip.HighlightArea(this);return false;" class="stroke">
+                    <img src="https://www.twiddla.com/images/toolbar/subtoolbar-stroke-1.png" align="absmiddle">
+                </a>
+                <a href="javascript:void(null);" alt="Pen Size: 3px" title="Pen Size: 3px" onclick="sendPenSize(3);toolStrip.HighlightArea(this);return false;" class="stroke">
+                    <img src="https://www.twiddla.com/images/toolbar/subtoolbar-stroke-2.png" align="absmiddle">
+                </a>
+                <a href="javascript:void(null);" alt="Pen Size: 6px" title="Pen Size: 6px" onclick="sendPenSize(6);toolStrip.HighlightArea(this);return false;" class="stroke">
+                    <img src="https://www.twiddla.com/images/toolbar/subtoolbar-stroke-3.png" align="absmiddle">
+                </a>
+                <a href="javascript:void(null);" alt="Pen Size: 12px" title="Pen Size: 12px" onclick="sendPenSize(12);toolStrip.HighlightArea(this);return false;" class="stroke">
+                    <img src="https://www.twiddla.com/images/toolbar/subtoolbar-stroke-4.png" align="absmiddle">
+                </a>
+                <a href="javascript:void(null);" alt="Pen Size: 20px" title="Pen Size: 20px" onclick="sendPenSize(20);toolStrip.HighlightArea(this);return false;" class="stroke">
+                    <img src="https://www.twiddla.com/images/toolbar/subtoolbar-stroke-5.png" align="absmiddle">
+                </a>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!-- Canvas -->
+    <div class="col-sm-9" id="canvas_page">
+        <canvas id="drawing" width="300" height="300"></canvas>
+    </div>
+    <!-- Canvas -->
+
+
+
+    <!-- Chat -->
+    <div class="col-md-3  well chat ">
+        <!-- Facebook share -->
+        <div class="fb-share-button" data-href="http://www.planwallpaper.com/static/images/da3w3eds.jpg" data-layout="button" data-size="large" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse">Share</a></div>
+        <!-- Facebook share -->
+        <div id="dragMe" class="panel panel-primary">
+            <div class="panel-heading">
+                <h4 class="room-title text-center"><!-- Room name (use jQuery) --></h4>
+            </div>
+            <div class="panel-body">
+                <div class="messages">
+                    <!-- Messages end up here! -->
+                </div>
+                <br>
+                <form id="message-form">
+                    <div class="form-group">
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                    <i class="glyphicon glyphicon-comment"></i>
+                                </span>
+                            <input type="text" name="message" placeholder="Message" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" class="btn btn-primary btn-block" />
+                    </div>
+                </form>
+                <div class="pannel-footer">
+                    <a id="invite" href="/index.html" class="text-center">
+                        <p class="text-center">Invite a friend</p>
+                        <div class="fb-like" data-layout="standard" data-action="recommend" data-size="large" data-show-faces="true" data-share="true"></div>
+                    </a>
+                    <a href="/index.html">
+                        <p class="text-center">Exit Room</p>
+                    </a>
+                    <!--  Link should open new tab for email or SMS invite -->
+                </div>
+            </div>
+            <div class="fb-share-button" data-href="https://young-scrubland-25157.herokuapp.com" data-layout="button" data-size="large" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse">Share</a></div>
+            <div>
+                <p>Like us on Facebook</p>
+                <div class="fb-like" data-href="https://young-scrubland-25157.herokuapp.com" data-layout="standard" data-action="like" data-size="large" data-show-faces="true" data-share="true"></div>
+            </div>
+            <!-- Chat -->
+            <script src="/js/client.js"></script>
+            <script src="/js/jquery-2.1.4.min.js"></script>
+            <script src="/js/socket.io-1.3.7.js"></script>
+            <script src="/js/moment.js"></script>
+            <script src="/js/QueryParams.js"></script>
+            <script src="/js/app.js"></script>
 </body>
 
 </html>
