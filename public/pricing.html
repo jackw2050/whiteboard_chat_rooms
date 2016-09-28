@@ -1,322 +1,399 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html>
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <title>Blog Post - Start Bootstrap Template</title>
-    <!-- Bootstrap Core CSS -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <!-- Custom CSS -->
-    <link href="css/blog-post.css" rel="stylesheet">
+    <title>Pricing</title>
+</head>
+
+
 
 
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-
-
-
-</head>
-
 <body>
-    <!-- Page Content -->
-    <div class="container">
-
-
-
-
-
-
-        <div class="row">
-            <!-- Blog Post Content Column -->
-            <br>
-            <script>
-            // This is called with the results from from FB.getLoginStatus().
-            function statusChangeCallback(response) {
-                console.log('statusChangeCallback');
-                console.log(response);
-                // The response object is returned with a status field that lets the
-                // app know the current login status of the person.
-                // Full docs on the response object can be found in the documentation
-                // for FB.getLoginStatus().
-                if (response.status === 'connected') {
-                    // Logged into your app and Facebook.
-                    testAPI();
-                } else if (response.status === 'not_authorized') {
-                    // The person is logged into Facebook, but not your app.
-                    document.getElementById('status').innerHTML = 'Please log ' +
-                        'into this app.';
-                } else {
-                    // The person is not logged into Facebook, so we're not sure if
-                    // they are logged into this app or not.
-                    document.getElementById('status').innerHTML = 'Please log ' +
-                        'into Facebook.';
-                }
-            }
-
-            // This function is called when someone finishes with the Login
-            // Button.  See the onlogin handler attached to it in the sample
-            // code below.
-            function checkLoginState() {
-                FB.getLoginStatus(function(response) {
-                    statusChangeCallback(response);
-                });
-            }
-
-            window.fbAsyncInit = function() {
-                FB.init({
-                    appId: '1617850465181015',
-                    cookie: true, // enable cookies to allow the server to access 
-                    // the session
-                    xfbml: true, // parse social plugins on this page
-                    version: 'v2.5' // use graph api version 2.5
-                });
-
-                // Now that we've initialized the JavaScript SDK, we call 
-                // FB.getLoginStatus().  This function gets the state of the
-                // person visiting this page and can return one of three states to
-                // the callback you provide.  They can be:
-                //
-                // 1. Logged into your app ('connected')
-                // 2. Logged into Facebook, but not your app ('not_authorized')
-                // 3. Not logged into Facebook and can't tell if they are logged into
-                //    your app or not.
-                //
-                // These three cases are handled in the callback function.
-
-                FB.getLoginStatus(function(response) {
-                    statusChangeCallback(response);
-                });
-
-            };
-
-            // Load the SDK asynchronously
-            (function(d, s, id) {
-                var js, fjs = d.getElementsByTagName(s)[0];
-                if (d.getElementById(id)) return;
-                js = d.createElement(s);
-                js.id = id;
-                js.src = "//connect.facebook.net/en_US/sdk.js";
-                fjs.parentNode.insertBefore(js, fjs);
-            }(document, 'script', 'facebook-jssdk'));
-
-            // Here we run a very simple test of the Graph API after login is
-            // successful.  See statusChangeCallback() for when this call is made.
-            function testAPI() {
-                console.log('Welcome!  Fetching your information.... ');
-                FB.api('/me', function(response) {
-                    console.log('Successful login for: ' + response.name);
-                    document.getElementById('status').innerHTML =
-                        'Thanks for logging in, ' + response.name + '!';
-
-                    document.getElementById('screen_name').value = response.name;
-
-
-                });
-            }
-            </script>
-            <!--
-  Below we include the Login Button social plugin. This button uses
-  the JavaScript SDK to present a graphical Login button that triggers
-  the FB.login() function when clicked.
--->
-            <fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
-            </fb:login-button>
-            <div id="status">
-            </div>
-            <br>
-            <br>
-            <div class="col-md-16"></div>
-            <div>
-
-
-
-
-<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button>
-
-  <!-- Modal -->
-  <div class="modal fade" id="myModal" role="dialog" action="/chat.html">
-    <div class="modal-dialog">
-    
-      <!-- Modal content-->
-      <div class="modal-content">
-        <div class="modal-header">
-          
-          <h4 class="modal-title">Modal Header</h4>
-        </div>
-        <div class="modal-body">
-                          <div class="col-md-12">
-                    <h4 class="text-center">Join Chat</h4>
-                   
-                    <form action="/chat.html">
-                        <div class="form-group">
-                            <label>Display Name</label>
-                            <div class="input-group">
-                                <span class="input-group-addon">
-                                     <i class="glyphicon glyphicon-user"></i>
-                                 </span>
-                                <input id="screen_name" type="text" name="name" class="form-control" />
-                            </div><!-- input-group -->
-                        </div><!-- form-group -->
-
-                        <div class="form-group">
-                            <label>Room Name</label>   <!-- Replace with selector -->
-                            <div class="input-group">
-                                <span class="input-group-addon">
-                                        <i class="glyphicon glyphicon-comment"></i>
-                                    </span>
-                                <input type="text" name="room" class="form-control" />
-                            </div> <!-- input-group -->
-                        </div> <!-- form-group -->
-
-                        
-                      
-                    </form>
-                </div> <!-- Well -->
-
-
-
-
-
-        </div>
-
-
-
-
-<!-- Open model button -->
-
-        <div class="modal-footer">
-        <!-- <button type="button" class="close" data-dismiss="modal">&times;</button> -->
-         <!--  <button type="button" class="btn btn-default" data-dismiss="modal">Close2</button> -->
-          <input type="submit" value="Join Chat" data-dismiss="modal" class="btn-sm btn-primary btn-block" />
-        </div>
-
-
-<!-- Open model button -->
-
-
-      </div>
-      
-    </div>
-  </div>
-
-
-
-
-
-
-
-
-
-
-
-                <!-- Side Widget Well   ================================== -->
-<!--                 <div class="col-md-4 col-md-offset-4 well">
-                    <h4 class="text-center">Join Chat</h4>
-                    <form action="/chat.html">
-                        <div class="form-group">
-                            <label>Display Name</label>
-                            <div class="input-group">
-                                <span class="input-group-addon">
-                                     <i class="glyphicon glyphicon-user"></i>
-                                 </span>
-                                <input id="screen_name" type="text" name="name" class="form-control" />
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label>Room Name</label>   
-                            <div class="input-group">
-                                <span class="input-group-addon">
-                                        <i class="glyphicon glyphicon-comment"></i>
-                                    </span>
-                                <input type="text" name="room" class="form-control" />
-                            </div> 
-                        </div> 
-
-                        <input type="submit" value="Join Chat" class="btn-sm btn-primary btn-block" />
-                      
-                    </form>
-                </div>  -->
-        </div>
-    
-    </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <!-- Footer -->
-    <footer>
-    <div class="page-footer__inner">
+<style type="text/css">
+    body
+{
+    margin-top: 20px;
+}
+.panel
+{
+    text-align: center;
+}
+.panel:hover { box-shadow: 0 1px 5px rgba(0, 0, 0, 0.4), 0 1px 5px rgba(130, 130, 130, 0.35); }
+.panel-body
+{
+    padding: 0px;
+    text-align: center;
+}
+
+.the-price
+{
+    background-color: rgba(220,220,220,.17);
+    box-shadow: 0 1px 0 #dcdcdc, inset 0 1px 0 #fff;
+    padding: 20px;
+    margin: 0;
+}
+
+.the-price h1
+{
+    line-height: 1em;
+    padding: 0;
+    margin: 0;
+}
+
+.subscript
+{
+    font-size: 25px;
+}
+
+/* CSS-only ribbon styles    */
+.cnrflash
+{
+    /*Position correctly within container*/
+    position: absolute;
+    top: -9px;
+    right: 4px;
+    z-index: 1; /*Set overflow to hidden, to mask inner square*/
+    overflow: hidden; /*Set size and add subtle rounding        to soften edges*/
+    width: 100px;
+    height: 100px;
+    border-radius: 3px 5px 3px 0;
+}
+.cnrflash-inner
+{
+    /*Set position, make larger then            container and rotate 45 degrees*/
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 145px;
+    height: 145px;
+    -ms-transform: rotate(45deg); /* IE 9 */
+    -o-transform: rotate(45deg); /* Opera */
+    -moz-transform: rotate(45deg); /* Firefox */
+    -webkit-transform: rotate(45deg); /* Safari and Chrome */
+    -webkit-transform-origin: 100% 100%; /*Purely decorative effects to add texture and stuff*/ /* Safari and Chrome */
+    -ms-transform-origin: 100% 100%;  /* IE 9 */
+    -o-transform-origin: 100% 100%; /* Opera */
+    -moz-transform-origin: 100% 100%; /* Firefox */
+    background-image: linear-gradient(90deg, transparent 50%, rgba(255,255,255,.1) 50%), linear-gradient(0deg, transparent 0%, rgba(1,1,1,.2) 50%);
+    background-size: 4px,auto, auto,auto;
+    background-color: #aa0101;
+    box-shadow: 0 3px 3px 0 rgba(1,1,1,.5), 0 1px 0 0 rgba(1,1,1,.5), inset 0 -1px 8px 0 rgba(255,255,255,.3), inset 0 -1px 0 0 rgba(255,255,255,.2);
+}
+.cnrflash-inner:before, .cnrflash-inner:after
+{
+    /*Use the border triangle trick to make                 it look like the ribbon wraps round it's                container*/
+    content: " ";
+    display: block;
+    position: absolute;
+    bottom: -16px;
+    width: 0;
+    height: 0;
+    border: 8px solid #800000;
+}
+.cnrflash-inner:before
+{
+    left: 1px;
+    border-bottom-color: transparent;
+    border-right-color: transparent;
+}
+.cnrflash-inner:after
+{
+    right: 0;
+    border-bottom-color: transparent;
+    border-left-color: transparent;
+}
+.cnrflash-label
+{
+    /*Make the label look nice*/
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    display: block;
+    width: 100%;
+    padding-bottom: 5px;
+    color: #fff;
+    text-shadow: 0 1px 1px rgba(1,1,1,.8);
+    font-size: 0.95em;
+    font-weight: bold;
+    text-align: center;
+}
+
+</style>
+
+
+<div class="container">
     <div class="row">
+        <div class="col-xs-12 col-md-3">
+            <div class="panel panel-primary"><style type="text/css">
+                body
+{
+    margin-top: 20px;
+}
+.panel
+{
+    text-align: center;
+}
+.panel:hover { box-shadow: 0 1px 5px rgba(0, 0, 0, 0.4), 0 1px 5px rgba(130, 130, 130, 0.35); }
+.panel-body
+{
+    padding: 0px;
+    text-align: center;
+}
 
-                <ul >
-                    <div class="col-sm-3">
-                        <ul class="page-footer-nav__section-inner">
-                            <li class="page-footer-nav__section-title">Mark II</li>
-                            <li class="page-footer-nav__item"><a href="/lang/en/tour" class="page-footer-nav__link" site="">Tour</a></li>
-                            <li class="page-footer-nav__item"><a href="/lang/en/sample" class="page-footer-nav__link" site="">Samples</a></li>
+.the-price
+{
+    background-color: rgba(220,220,220,.17);
+    box-shadow: 0 1px 0 #dcdcdc, inset 0 1px 0 #fff;
+    padding: 20px;
+    margin: 0;
+}
 
-                        </ul>
-                    </div>
-                    <div class="col-sm-3">
-                        <ul class="page-footer-nav__section-inner">
-                            <li class="page-footer-nav__section-title">Plans</li>
-                            <li class="page-footer-nav__item"><a href="/lang/en/pricing" class="page-footer-nav__link" site="">Free</a></li>
-                            <li class="page-footer-nav__item"><a href="/lang/en/plus" class="page-footer-nav__link" site="">Plus</a></li>
+.the-price h1
+{
+    line-height: 1em;
+    padding: 0;
+    margin: 0;
+}
 
-                        </ul>
-                    </div>
-                    <div class="col-sm-3">
-                        <ul class="page-footer-nav__section-inner">
-                            <li class="page-footer-nav__section-title">About</li>
-                            <li class="page-footer-nav__item"><a href="/lang/en/blog" class="page-footer-nav__link" target="_blank">Blog</a></li>
+.subscript
+{
+    font-size: 25px;
+}
 
-                            <li class="page-footer-nav__item"><a href="/lang/en/privacy" class="page-footer-nav__link" site="">Privacy</a></li>
-                            
-                            <li class="page-footer-nav__item"><a href="/lang/en/tos" class="page-footer-nav__link" site="">Terms</a></li>
-                            
-                        </ul>
+/* CSS-only ribbon styles    */
+.cnrflash
+{
+    /*Position correctly within container*/
+    position: absolute;
+    top: -9px;
+    right: 4px;
+    z-index: 1; /*Set overflow to hidden, to mask inner square*/
+    overflow: hidden; /*Set size and add subtle rounding        to soften edges*/
+    width: 100px;
+    height: 100px;
+    border-radius: 3px 5px 3px 0;
+}
+.cnrflash-inner
+{
+    /*Set position, make larger then            container and rotate 45 degrees*/
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 145px;
+    height: 145px;
+    -ms-transform: rotate(45deg); /* IE 9 */
+    -o-transform: rotate(45deg); /* Opera */
+    -moz-transform: rotate(45deg); /* Firefox */
+    -webkit-transform: rotate(45deg); /* Safari and Chrome */
+    -webkit-transform-origin: 100% 100%; /*Purely decorative effects to add texture and stuff*/ /* Safari and Chrome */
+    -ms-transform-origin: 100% 100%;  /* IE 9 */
+    -o-transform-origin: 100% 100%; /* Opera */
+    -moz-transform-origin: 100% 100%; /* Firefox */
+    background-image: linear-gradient(90deg, transparent 50%, rgba(255,255,255,.1) 50%), linear-gradient(0deg, transparent 0%, rgba(1,1,1,.2) 50%);
+    background-size: 4px,auto, auto,auto;
+    background-color: #aa0101;
+    box-shadow: 0 3px 3px 0 rgba(1,1,1,.5), 0 1px 0 0 rgba(1,1,1,.5), inset 0 -1px 8px 0 rgba(255,255,255,.3), inset 0 -1px 0 0 rgba(255,255,255,.2);
+}
+.cnrflash-inner:before, .cnrflash-inner:after
+{
+    /*Use the border triangle trick to make                 it look like the ribbon wraps round it's                container*/
+    content: " ";
+    display: block;
+    position: absolute;
+    bottom: -16px;
+    width: 0;
+    height: 0;
+    border: 8px solid #800000;
+}
+.cnrflash-inner:before
+{
+    left: 1px;
+    border-bottom-color: transparent;
+    border-right-color: transparent;
+}
+.cnrflash-inner:after
+{
+    right: 0;
+    border-bottom-color: transparent;
+    border-left-color: transparent;
+}
+.cnrflash-label
+{
+    /*Make the label look nice*/
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    display: block;
+    width: 100%;
+    padding-bottom: 5px;
+    color: #fff;
+    text-shadow: 0 1px 1px rgba(1,1,1,.8);
+    font-size: 0.95em;
+    font-weight: bold;
+    text-align: center;
+}
+
+            </style>
+                <div class="panel-heading">
+                    <h3 class="panel-title">
+                        Bronze</h3>
+                </div>
+                <div class="panel-body">
+                    <div class="the-price">
+                        <h1>
+                            $0<span class="subscript">/mo</span></h1>
+                        <small></small>
                     </div>
-                    <div class="col-sm-3">
-                        <ul class="page-footer-nav__section-inner">
-                            <li class="page-footer-nav__section-title">Support</li>
-                            <li class="page-footer-nav__item"><a href="/lang/en/contact" class="page-footer-nav__link" site="">Contact</a></li>
-                            <li class="page-footer-nav__item"><a href="/lang/en/faq" class="page-footer-nav__link">FAQs</a></li>
-                            <li class="page-footer-nav__item"><a class="page-footer-nav__link" href="http://feedback.cacoo.com/forums/32527-general" target="_blank">UserVoice</a></li>
-            
-                        </ul>
+                    <table class="table">
+                        <tr>
+                            <td>
+                                0 Account
+                            </td>
+                        </tr>
+                        <tr class="active">
+                            <td>
+                                1 Project
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Other stuff
+                            </td>
+                        </tr>
+                        <tr class="active">
+                            <td>
+                                No Storage
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Other stuff
+                            </td>
+                        </tr>
+                        <tr class="active">
+                            <td>
+                                Other stuff
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="panel-footer">
+                    <a href="http://www.jquery2dotnet.com" class="btn btn-success" role="button">Sign Up</a>
                     </div>
-    
-                </ul>
-  
             </div>
-    </footer>
+        </div>
+        <div class="col-xs-12 col-md-3">
+            <div class="panel panel-success">
+                <div class="cnrflash">
+                    <div class="cnrflash-inner">
+                        <span class="cnrflash-label">MOST
+                            <br>
+                            POPULR</span>
+                    </div>
+                </div>
+                <div class="panel-heading">
+                    <h3 class="panel-title">
+                        Silver</h3>
+                </div>
+                <div class="panel-body">
+                    <div class="the-price">
+                        <h1>
+                            $20<span class="subscript">/mo</span></h1>
+                        <small></small>
+                    </div>
+                    <table class="table">
+                        <tr>
+                            <td>
+                                1 Account
+                            </td>
+                        </tr>
+                        <tr class="active">
+                            <td>
+                                Unlimited Projects
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Unlimited Access
+                            </td>
+                        </tr>
+                        <tr class="active">
+                            <td>
+                                200MB Storage
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Other stuff
+                            </td>
+                        </tr>
+                        <tr class="active">
+                            <td>
+                               Other stuff
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="panel-footer">
+                    <a href="http://www.jquery2dotnet.com" class="btn btn-success" role="button">Sign Up</a>
+                    </div>
+            </div>
+        </div>
+        <div class="col-xs-12 col-md-3">
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <h3 class="panel-title">
+                        Gold</h3>
+                </div>
+                <div class="panel-body">
+                    <div class="the-price">
+                        <h1>
+                            $35<span class="subscript">/mo</span></h1>
+                        <small></small>
+                    </div>
+                    <table class="table">
+                        <tr>
+                            <td>
+                                1 Account
+                            </td>
+                        </tr>
+                        <tr class="active">
+                            <td>
+                                Unlimited Project
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Unlimited Access
+                            </td>
+                        </tr>
+                        <tr class="active">
+                            <td>
+                                500MB Storage
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Other stuff
+                            </td>
+                        </tr>
+                        <tr class="active">
+                            <td>
+                                Other stuff
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="panel-footer">
+                    <a href="http://www.jquery2dotnet.com" class="btn btn-success" role="button">Sign Up</a> </div>
+            </div>
+        </div>
+    </div>
+</div>
 
-    <!-- /.container -->
-    <!-- jQuery -->
-    <script src="js/jquery.js"></script>
-    <script src="/js/socket.io-1.3.7.js"></script>
-    <script src="/js/moment.js"></script>
-    <script src="/js/QueryParams.js"></script>
-    <script src="/js/app.js"></script>
-    <!-- Bootstrap Core JavaScript -->
-    <script src="js/bootstrap.min.js"></script>
+
 </body>
-
 </html>
