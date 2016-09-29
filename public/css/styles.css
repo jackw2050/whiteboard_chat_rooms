@@ -9,12 +9,56 @@ h1 {
 	margin: 24px 0;
 }
 
-.messages p {
-	margin: 6px 0;
-}
 .chat{
-	border:solid 2px black;
+	border:solid 2px white;
 }
-.well{
-	overflow: scroll;
+.panel-primary{
+	    border: solid;
+        border-color: #E9E9E9;
 }
+
+.panel-heading{
+		border: solid;
+        border-color: white;
+        background-color: white;
+}
+#dragMe{
+	        margin-top: 35px;
+        border: solid;
+        border-color: #E9E9E9;
+        background-color: white;
+}
+ .well {
+        margin-top: 35px;
+        border: solid;
+        border-color: white;
+        background-color: white;
+        overflow: scroll;
+    }
+    
+    .label {
+        color: #518DBF;
+    }
+    
+    #primaryToolbar {
+        background-color: #E9E9E9;
+        border: 2px solid white;
+        border-radius: 12px;
+    }
+    
+    #secondaryToolbar {
+        background-color: #E9E9E9;
+        border: 2px solid white;
+        border-radius: 12px;
+    }
+    
+    .messages {
+        height: 200px;
+        overflow: auto;
+        margin: 6px 0;
+    }
+    
+    #canvas_page {
+        border: solid;
+        border-color: #E9E9E9;
+    }
