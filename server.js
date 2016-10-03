@@ -13,9 +13,12 @@ app.use(express.static(__dirname + '/public'));
 // array of all lines drawn
 var line_history = [];
 var clientInfo = {};
+var socketId = "";
+
 
 // Sends current users to provided socket
 function sendCurrentUsers(socket) {
+    console.log("send users");
     var info = clientInfo[socket.id];
     var users = [];
 
@@ -39,18 +42,39 @@ function sendCurrentUsers(socket) {
 }
 
 
+
+
+
+
 // io start
 
 
 
 io.on('connection', function(socket) {
-    verboseServer && console.log('User connected via socket.io!');
-   for (var i in line_history) {
-      socket.emit('draw_line', { line: line_history[i] } );
-   }
+
+
+
+    // console.log("client info " + clientInfo);
+    console.log("client info " + JSON.stringify(clientInfo, null, 2));
+
+    console.log("socket id " + socket.id);
+
+   // for (var i in line_history) {
+   //    // socket.emit('draw_line', { line: line_history[i] } );
+   //    // io.to(data.room).emit('draw_line', { line: line_history[i] } );
+      
+   // }
+
+    // timestamp property - JavaScript timestamp (milliseconds)
+    socket.emit('message', {
+        name: '',
+        text: 'Session started',
+        timestamp: moment().valueOf()
+    });
+
     socket.on('disconnect', function() {
         var userData = clientInfo[socket.id];
-        verboseServer && console.log("disconnect");
+        console.log("disconnect");
         if (typeof userData !== 'undefined') {
             socket.leave(userData.room);
             io.to(userData.room).emit('message', {
@@ -61,25 +85,39 @@ io.on('connection', function(socket) {
             delete clientInfo[socket.id];
         }
     });
+
+
    // add handler for message type "draw_line".
    socket.on('draw_line', function (data) {
+    // console.log(JSON.stringify(data, null, 2));
+    
       // add received line to history 
       line_history.push(data.line);
-      // send line to all clients
-      io.emit('draw_line', { line: data.line });
+
+      io.to(data.room).emit('draw_line', { line: data.line });
    });
+
+
+
+
     socket.on('joinRoom', function(req) {
         clientInfo[socket.id] = req;
+        socketId = req.room;
         socket.join(req.room);
         socket.broadcast.to(req.room).emit('message', {
             name: 'System',
             text: req.name + ' has entered the room.',
             timestamp: moment().valueOf()
         });
+           for (var i in line_history) {
+      // socket.emit('draw_line', { line: line_history[i] } );
+      socket.broadcast.to(req.room).emit('draw_line', { line: line_history[i] } );
+      
+   }
     });
 
     socket.on('message', function(message) {
-        verboseServer && console.log('Message received: ' + message.text);
+        console.log('Message received: ' + message.text);
         if (message.text === '@currentUsers') {
             sendCurrentUsers(socket);
         } else {
@@ -88,15 +126,18 @@ io.on('connection', function(socket) {
         }
     });
 
-    // timestamp property - JavaScript timestamp (milliseconds)
 
-    socket.emit('message', {
-        name: '',
-        text: 'Session started',
-        timestamp: moment().valueOf()
-    });
+
+
+
+
+
+
+
+
+
 });
 
 http.listen(PORT, function() {
-    verboseServer && console.log("ChatServer Started");
+    console.log("ChatServer Started");
 });

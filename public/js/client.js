@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", function() {
+// document.addEventListener("DOMContentLoaded", function() {
    var mouse = { 
       click: false,
       move: false,
@@ -48,4 +48,4 @@ document.addEventListener("DOMContentLoaded", function() {
       setTimeout(mainLoop, 25);
    }
    mainLoop();
-});
+// });
