@@ -6,6 +6,7 @@
     <title>Chat</title>
     <link rel="stylesheet" href="./css/bootstrap.min.css">
     <link rel="stylesheet" href="./css/styles.css">
+    <script src="js/html5kellycolorpicker.min.js"></script>
 
 </head>
 
@@ -14,59 +15,7 @@
         <div id="primaryToolbar" class="col-sm-12">
             <div id="divToolbarMain" class="toolbar">
                 <div id="groupBackground" class="group" style="margin-left: 15px">
-                    <div class="col-xs-1">
-                        <a id="btnBlankCanvas" href="javascript:void(null);" target="framePop" title="Open a blank canvas" onclick="if (toolStrip.confirmClear()){sendLoad('', whiteboard.DocModes.Whiteboard);sendDocMode(whiteboard.DocModes.Whiteboard);}" class="selected">
-                            <img src="https://www.twiddla.com/images/toolbar/toolbar-canvas.png" style="margin-right:-5px;">
-                            <div>Whiteboard</div>
-                        </a>
-                    </div>
-                    <div class="col-xs-1">
-                        <a id="btnLoadImage" href="https://www.twiddla.com/AddIns/NewSessionIntro.aspx?checksum=&amp;sessionID=1#image" target="framePop" title="Open an Image" onclick="openPop();" class="">
-                            <img src="https://www.twiddla.com/images/toolbar/toolbar-media.png" style="margin-right:-5px;">
-                            <div>Image</div>
-                        </a>
-                    </div>
-                    <script>
-                    toolStrip.DocModeButtons = ["btnBlankCanvas", "btnWebPage", "btnLoadDocument", "btnLoadImage", "btnEtherpad"];
-                    for (var a = 0; a < toolStrip.DocModeButtons.length; a++) {
-                        toolStrip.DocModeButtons[a] = document.getElementById(toolStrip.DocModeButtons[a]);
-                    }
-                    </script>
-                </div>
-                <div id="groupTools" class="group col-xs-1">
-                    <a id="btnTools" href="javascript:setDrawMode(DrawModes.None);" title="Browse: For clicking links" onclick="setDrawMode(DrawModes.None);closePop();return false;" class="">
-                        <img src="https://www.twiddla.com/images/toolbar/toolbar-browse.png" style="margin-right:-5px;">
-                        <div>Browse</div>
-                    </a>
-                    <!--         <a id="btnLabels" href="javascript:void(null);" style="padding-left: 6px;" title="Move: Drag stuff onto the page" onclick="setDrawMode(DrawModes.Move);closePop();return false;" class="">
-            <img src="https://www.twiddla.com/images/toolbar/toolbar-select.png">
-            <div>Select</div>
-        </a> -->
-                </div>
-                <div class="group col-xs-1">
-                    <a id="btnPLine" href="javascript:setDrawMode(DrawModes.PLine, null);" title="Pencil Tool" onclick="setDrawMode(DrawModes.PLine, null);return false;" class="selected">
-                        <img src="https://www.twiddla.com/images/toolbar/toolbar-draw.png">
-                        <div>Draw</div>
-                    </a>
-                </div>
-                <div class="group col-xs-1">
-                    <a id="btnErase" href="javascript:setDrawMode(DrawModes.Erase, null);" title="Erase" onclick="setDrawMode(DrawModes.Erase, null);return false;" class="">
-                        <img src="https://www.twiddla.com/images/toolbar/toolbar-witeout2.png">
-                        <div>Erase</div>
-                    </a>
-                </div>
-                <div class="group col-xs-1">
-                    <a id="btnText" href="javascript:setDrawMode(DrawModes.Text);" style="padding-left: 9px; padding-right: 7px" title="Text: For adding and editing text" onclick="setDrawMode(DrawModes.Text);closePop();return false;" class="">
-                        <img src="https://www.twiddla.com/images/toolbar/toolbar-text.png">
-                        <div style="margin-right: 2px;">Text</div>
-                    </a>
-                </div>
-                <div class="group col-xs-1">
-                    <a id="btnShapshot" href="https://www.twiddla.com/AddIns/SnapshotPanel.aspx?checksum=&amp;sessionID=1" title="Save a Snapshot" target="framePop" onclick="openPop();MediaTab_init();">
-                        <img src="https://www.twiddla.com/images/toolbar/toolbar-save.png">
-                        <div>Save…</div>
-                    </a>
-                </div>
+
                 <div>
                             <!-- Facebook share -->
         <div class="fb-share-button" data-href="http://www.planwallpaper.com/static/images/da3w3eds.jpg" data-layout="button" data-size="large" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse">Share your pic on Facebook</a></div>
@@ -101,9 +50,13 @@
                 <div class="label">
                     Brush color:
                 </div>
-                <input id="chosen-color" type="text" readonly="" value="#ff0000">
-         <input type="color" value="#ff0000" onchange="javascript:document.getElementById('chosen-color').value = document.getElementById('background-color').value;">
-
+<!--                 <input id="chosen-color" type="text" readonly="" value="#ff0000">
+         <input type="color" value="#ff0000" onchange="javascript:document.getElementById('chosen-color').value = document.getElementById('background-color').value;"> -->
+        <canvas id="picker"></canvas><br>
+        <input id="color" value="#54aedb">
+        <script>
+            new KellyColorPicker({place : 'picker', input : 'color', size : 150});
+        </script>
                 
                 <!-- Color picker -->
                 <div class="label">
@@ -186,6 +139,7 @@
 
             <!-- Chat -->
            <!--  <script src="/js/client.js"></script> -->
+            
             <script src="/js/jquery-2.1.4.min.js"></script>
             <script src="/js/socket.io-1.3.7.js"></script>
             <script src="/js/moment.js"></script>
