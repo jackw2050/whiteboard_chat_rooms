@@ -51,19 +51,24 @@ function sendCurrentUsers(socket) {
 
 
 io.on('connection', function(socket) {
-
-
-
     // console.log("client info " + JSON.stringify(clientInfo, null, 2));
-
-
     // for (var i in line_history) {
     //    // socket.emit('draw_line', { line: line_history[i] } );
     //    // io.to(data.room).emit('draw_line', { line: line_history[i] } );
-
     // }
 
-    // timestamp property - JavaScript timestamp (milliseconds)
+
+
+    // console.log(socket.id);
+    // // room = clientInfo[socket.id].room;
+    // for (var i in line_history) {
+    //     // console.log(line_history);
+    //     // socket.emit('draw_line', { line: line_history[i] } );
+    //     socket.broadcast.to(room).emit('draw_line', { line: line_history[i] });
+    //     // socket.broadcast.to(socketId).emit('draw_line', { line: line_history[i] });
+    // }
+
+
     socket.emit('message', {
         name: '',
         text: 'Session started',
@@ -88,10 +93,8 @@ io.on('connection', function(socket) {
     // add handler for message type "draw_line".
     socket.on('draw_line', function(data) {
         // console.log(JSON.stringify(data, null, 2));
-
         // add received line to history 
         line_history.push(data.line);
-
         io.to(data.room).emit('draw_line', { line: data.line });
     });
 
@@ -103,10 +106,14 @@ io.on('connection', function(socket) {
         socketId = req.room;
         socket.join(req.room);
 
-        for (var i in line_history) {
 
-            socket.emit('draw_line', { line: line_history[i] } );
-            // socket.broadcast.to(req.room).emit('draw_line', { line: line_history[i] });
+        // console.log(clientInfo[socket.id]);
+        room = clientInfo[socket.id].room;
+        console.log("joining room " + room);
+        for (var i in line_history) {
+            // console.log(line_history);
+            io.to(req.room).emit('draw_line', { line: line_history[i] });
+            //socket.broadcast.to(room).emit('draw_line', { line: line_history[i] });
             // socket.broadcast.to(socketId).emit('draw_line', { line: line_history[i] });
         }
 
@@ -115,9 +122,8 @@ io.on('connection', function(socket) {
             text: req.name + ' has entered the room.',
             timestamp: moment().valueOf()
         });
-       
-
     });
+
 
     socket.on('message', function(message) {
         console.log('Message received: ' + message.text);

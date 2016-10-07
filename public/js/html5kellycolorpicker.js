@@ -1105,6 +1105,8 @@ function KellyColorPicker(cfg) {
 
             input.style.background = rgba;
         }
+       console.log(input.value);
+
     }
 
     function initCanvas() {

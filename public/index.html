@@ -40,6 +40,13 @@
         <div class="row">
             <!-- Blog Post Content Column -->
             <br>
+
+
+
+<!--    Facebook Login script   -->
+
+
+
             <script>
             // This is called with the results from from FB.getLoginStatus().
             function statusChangeCallback(response) {
@@ -126,6 +133,12 @@
                 });
             }
             </script>
+
+<!--    Facebook Login script   -->
+
+
+
+
             <!--
   Below we include the Login Button social plugin. This button uses
   the JavaScript SDK to present a graphical Login button that triggers
@@ -154,11 +167,20 @@
                             <button type="button" class="btn btn-success">Sign up</button>
                         </div>
                         <div class="col-md-4  text-center ">
+
+
+<!-- Sign in -->
+
                             <h3>Sign in.</h3>
                             <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#myModal">Sign in</button>
-                            <!--            <button type="button" class="btn btn-primary">Sign in</button>
- -->
+
                         </div>
+<!-- Sign in -->
+
+
+
+
+
                         <div class="col-md-3  text-center ">
                             <form action="/chat.html">
                                 <div class="form-group">
@@ -180,6 +202,10 @@
             <!-- Row -->
             <!-- <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button>
  -->
+
+
+
+
             <!-- Modal -->
             <div class="modal fade" id="myModal" role="dialog">
                 <div class="modal-dialog">
@@ -200,8 +226,8 @@
                                     <div class="form-group">
                                         <label>Display Name</label>
                                         <div class="input-group">
-                                            <span class="input-group-addon">
-                                          <i class="glyphicon glyphicon-user"></i>
+                                            <span class="input-group">
+                                          <!-- <i class="glyphicon glyphicon-user"></i> -->
                                             </span>
                                             <input id="screen_name_dummy" type="text" name="name_dummy" class="form-control" onchange="javascript:document.getElementById('screen_name').value = document.getElementById('screen_name_dummy').value;">
                                         </div>
@@ -210,23 +236,32 @@
                                     <!-- form-group -->
                                     <div class="form-group">
                                         <label>Room Name</label>
-                                        <!-- Replace with selector -->
+                                        
+
+
+
+
                                         <div class="input-group">
-                                            <span class="input-group-addon">
-                                            <i class="glyphicon glyphicon-comment"></i>
+                                            <span class="input-group">
+                                            <!-- <i class="glyphicon glyphicon-comment"></i> -->
                                             </span>
 
 
 
 
+                                            <div class="col-sm-6">
 
-                                            <select id="mySelect">
+                                            <select class="form-control "  id="mySelect">
                                             <option value="Public Room 1">Public Room 1</option>
                                             <option value="Public Room 2">Public Room 2</option>
                                             <option value="Public Room 3">Public Room 3</option>
                                             <option value="Private Room">Private Room</option>
+                                            <option value="Private Room">Join Private Room</option>
                                             </select>
-
+                                            </div>
+                                            <div class="col-sm-6">
+                                            <input id="room_to_join" type="text" name="name_dummy" class="form-control" >
+                                            </div>
 
 
 
@@ -239,6 +274,11 @@ function myFunction() {
       var room_name = "Private" + Math.floor((Math.random() * 100000) + 1);
       document.getElementById('room_name').value = room_name;
       console.log(room_name);
+    }
+    elseif(x == 4){
+        var room_name = "Private" + document.getElementById('room_to_join').value;
+        document.getElementById('room_name').value = room_name;
+        console.log(room_name);
     }
     else{
       document.getElementById('room_name').value = document.getElementsByTagName("option")[x].value;
