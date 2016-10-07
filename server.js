@@ -1,19 +1,51 @@
-// https://young-scrubland-25157.herokuapp.com
+// server.js
 
-var PORT = process.env.PORT || 3000;
+// set up ======================================================================
+// get all the tools we need
+var express  = require('express');
+var app      = express();
 var moment = require('moment');
-var express = require('express');
-var app = express();
-var http = require('http').Server(app);
-var io = require('socket.io')(http);
-
-var verboseServer = true;
+var port     = process.env.PORT || 8080;
+var path = require('path');
+var passport = require('passport');
+var flash    = require('connect-flash'); // store and retrieve messages in session store
+var socketIo = require('socket.io')
+var morgan       = require('morgan'); // logger
+var cookieParser = require('cookie-parser'); // parse cookies
+var bodyParser   = require('body-parser'); // parse posts
+var session      = require('express-session'); // session middleware
+var http = require('http');
+var configDB = require('./config/database.js');
+var mongoose = require('mongoose');
 
 app.use(express.static(__dirname + '/public'));
-// array of all lines drawn
+require('./config/passport')(passport); // pass passport for configuration
+mongoose.connect(configDB.url);
+
+// set up our express application
+app.use(morgan('dev')); // log every request to the console
+app.use(cookieParser()); // read cookies (needed for auth)
+app.use(bodyParser()); // get information from html forms
+
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'hbs');
+// required for passport
+app.use(session({ secret: 'ilovechocolatepeanutbuttercups'})); // session secret
+app.use(passport.initialize());
+app.use(passport.session()); // persistent login sessions
+app.use(flash()); // use connect-flash for flash messages stored in session
+
+// routes ======================================================================
+require('./app/routes.js')(app, passport); // load our routes and pass in our app and fully configured passport
+
+//socketIo======================================================================
+var server = http.createServer(app);
+var io = socketIo.listen(server);
+
 var line_history = [];
-var clientInfo = {};
+var chat_history = [];
 var socketId = "";
+var clientInfo = {};
 
 
 // Sends current users to provided socket
@@ -42,38 +74,60 @@ function sendCurrentUsers(socket) {
 }
 
 
-
-
-
-
-// io start
-
-
-
 io.on('connection', function(socket) {
-    // console.log("client info " + JSON.stringify(clientInfo, null, 2));
-    // for (var i in line_history) {
-    //    // socket.emit('draw_line', { line: line_history[i] } );
-    //    // io.to(data.room).emit('draw_line', { line: line_history[i] } );
-    // }
 
-
-
-    // console.log(socket.id);
-    // // room = clientInfo[socket.id].room;
-    // for (var i in line_history) {
-    //     // console.log(line_history);
-    //     // socket.emit('draw_line', { line: line_history[i] } );
-    //     socket.broadcast.to(room).emit('draw_line', { line: line_history[i] });
-    //     // socket.broadcast.to(socketId).emit('draw_line', { line: line_history[i] });
-    // }
-
-
+// Session started message
     socket.emit('message', {
         name: '',
         text: 'Session started',
         timestamp: moment().valueOf()
     });
+
+
+
+
+
+    for (var i in line_history) {
+        socket.emit('draw_line', line_history[i]);
+    }
+    socket.on('draw_line', function(data) {
+    	var lineObject = {line: data.line, color: data.color, width: data.width};
+        line_history.push(lineObject);
+        io.emit('draw_line', lineObject);
+        // This is version to emit to a specific room
+        //io.to(data.room).emit('draw_line', { line: data.line });
+
+    });
+
+    socket.on('clearCanvas', function() {
+    	line_history = [];
+    	io.emit('clearCanvas', true);
+    });
+
+    for (var i in chat_history) {
+        socket.emit('chatMessage', chat_history[i]);
+    }
+
+    // old version
+    socket.on('chatMessage', function(msg) {
+    	chat_history.push(msg);
+    	io.emit('chatMessage', msg);
+    });
+
+
+    socket.on('message', function(message) {
+        console.log('Message received: ' + message.text);
+        if (message.text === '@currentUsers') {
+            sendCurrentUsers(socket);
+        } else {
+            message.timestamp = moment().valueOf();
+            io.to(clientInfo[socket.id].room).emit('message', message);
+        }
+    });
+
+
+
+
 
     socket.on('disconnect', function() {
         var userData = clientInfo[socket.id];
@@ -88,18 +142,6 @@ io.on('connection', function(socket) {
             delete clientInfo[socket.id];
         }
     });
-
-
-    // add handler for message type "draw_line".
-    socket.on('draw_line', function(data) {
-        // console.log(JSON.stringify(data, null, 2));
-        // add received line to history 
-        line_history.push(data.line);
-        io.to(data.room).emit('draw_line', { line: data.line });
-    });
-
-
-
 
     socket.on('joinRoom', function(req) {
         clientInfo[socket.id] = req;
@@ -125,28 +167,11 @@ io.on('connection', function(socket) {
     });
 
 
-    socket.on('message', function(message) {
-        console.log('Message received: ' + message.text);
-        if (message.text === '@currentUsers') {
-            sendCurrentUsers(socket);
-        } else {
-            message.timestamp = moment().valueOf();
-            io.to(clientInfo[socket.id].room).emit('message', message);
-        }
-    });
-
-
-
-
-
-
-
-
 
 
 
 });
 
-http.listen(PORT, function() {
-    console.log("ChatServer Started");
-});
+// launch ======================================================================
+server.listen(port);
+console.log('app listening on ' + port);

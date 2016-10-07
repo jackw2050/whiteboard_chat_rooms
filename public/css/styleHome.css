@@ -1,0 +1,77 @@
+body {
+	background-color:#dee6ed;
+	font-family: 'Righteous', cursive;
+}
+#main{
+	opacity: 0.8;
+}
+#logoMark{
+	width:200px;
+	height:100px;
+}
+#ourNav{
+	background-color:#7a7a7a;
+}
+#iconColor{
+	color:#00b6ad;
+}
+#iconColorWhite{
+	color:#f7f7f7;
+}
+#headerMark{
+	color:black;
+	font-family: 'Josefin Sans', sans-serif;
+}
+#jumboColor{
+	background-color:#f9fafc;
+}
+#left{
+}
+#right{
+}
+#canvas{
+	height:500px;
+}
+#chat{
+	background-color:#00b6ad;
+	height:500px;
+}
+#joinRoom{
+}
+#markFooter{
+	background-color:#dee6ed;
+}
+#headerId{
+	background-color:#364e63;
+}
+.temporaryCanvasCSS{
+	background-color:#f7f7f7;
+}
+.largeIcon{
+	font-size:50px;
+}
+.roundCorner{
+	border-radius:10px;
+}
+.lighterBackground{
+	background-color:#f7f7f7;
+	height:130px;
+}
+
+.fullscreen-bg {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    overflow: hidden;
+    z-index: -100;
+}
+
+.fullscreen-bg__video {
+    position: absolute;
+    top: 105px;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}

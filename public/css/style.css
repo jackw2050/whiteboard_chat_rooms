@@ -1,0 +1,112 @@
+body {
+	background-color:#dee6ed;
+	font-family: 'Baloo Bhaina', cursive;
+}
+#ourNav{
+	background-color:#f9fafc;
+}
+#iconColor{
+	color:#262626;
+}
+#iconColorWhite{
+	color:#262626;
+}
+#headerMark{
+	color:#7a7a7a;
+}
+#left{
+}
+#right{
+}
+#canvas{
+	height:500px;
+}
+.shareIcons{
+	font-size:30px;
+	margin:auto;
+	padding:auto;
+	margin-right:13px;
+	margin-left:5px;
+}
+#chat{
+	background-color:#ebeef3;
+	height:500px;
+}
+#markFooter{
+	background-color:#f9fafc;
+	color: #dee6ed;
+}
+.temporaryCanvasCSS{
+	background-color:#f7f7f7;
+}
+.circle {
+border-radius: 50%;
+border-width:1px;
+width: 25px;
+height: 25px;
+border-color:black;
+border-style:solid;
+/* width and height can be anything, as long as they're equal */
+}
+
+.redCircle {
+background-color: red;
+}
+
+.blueCircle {
+background-color: blue;
+}
+
+.blackCircle{
+background-color: black;
+}
+
+.yellowCircle{
+background-color: yellow;
+}
+
+.greenCircle{
+background-color: green;
+}
+
+.orangeCircle{
+background-color: orange;
+}
+
+.pinkCircle{
+background-color: pink;
+}
+
+.purpleCircle{
+background-color: purple;
+}
+
+.grayCircle{
+background-color: gray;
+}
+
+.squareSmall {
+height: 10px;
+width: 10px;
+background-color: black;
+margin:auto;
+margin-top:10px;
+}
+.navbar-nav {
+  padding-left:200px;
+}
+.squareMedium {
+height: 15px;
+width: 15px;
+background-color: black;
+margin:auto;
+margin-top:10px;
+}
+
+.squareLarge {
+height: 20px;
+width: 20px;
+background-color: black;
+margin:auto;
+margin-top:10px;
+}

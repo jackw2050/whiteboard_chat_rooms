@@ -1,0 +1,155 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Welcome to Mark!</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+  	<link rel="stylesheet" href="css/style.css">
+  	<link href="https://fonts.googleapis.com/css?family=Baloo+Bhaina" rel="stylesheet">
+  	<meta name="viewport" content="width=device-width, initial-scale=1">
+  	<script type="text/javascript" src="javascript/html5kellycolorpicker.js"></script>
+</head>
+<body>
+	<nav class="navbar" id="ourNav">
+		<div class="navbar-header">
+			<a href="/logout" class="navbar-brand"><span class="glyphicon glyphicon-home" id="iconColorWhite" aria-hidden="true"></span></a>
+			<h8 class="navbar-brand">Mark</h8>
+	    	<ul class="nav navbar-nav">
+    			<li class="dropdown">
+    				<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-tint" id="iconColor" aria-hidden="true"></span><span class="caret"></span></a>
+    				<ul class="dropdown-menu">
+						<canvas id="picker"></canvas><br>
+						       <input id="color" value="#54aedb ">
+						       <script>
+						           new KellyColorPicker({place : 'picker', input : 'color', size : 150});
+						       </script>
+    				</ul>
+    			</li>
+    			<li class="dropdown">
+    				<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-pencil" id="iconColor" aria-hidden="true"></span></span><span class="caret"></span></a>
+    				<ul class="dropdown-menu">
+	    				 <a href="#" class="dropdown-item"><div class="squareSmall" id="changeToSmall"></div></a>
+	                     <a href="#" class="dropdown-item"><div class="squareMedium" id="changeToMedium"></div></a>
+	                     <a href="#" class="dropdown-item"><div class="squareLarge" id="changeToLarge"></div></a>
+    				</ul>
+    			</li>
+    			<li class="dropdown">
+    				<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-share" id="iconColor" aria-hidden="true"></span></span><span class="caret"></span></a>
+    				<ul class="dropdown-menu">
+	    				 <a href="#" id="loadDrawing" class="dropdown-item shareIcons"><span class="glyphicon glyphicon-download-alt" id="iconColor" aria-hidden="true"></span></span></a>
+	    				 <a href="#" id="saveDrawing" class="dropdown-item shareIcons"><span class="glyphicon glyphicon-floppy-disk" id="iconColor" aria-hidden="true"></span></span></a>
+	    				 <a href="#" class="dropdown-item shareIcons"><span class="glyphicon glyphicon-send" id="iconColor" aria-hidden="true"></span></span></a>
+    				</ul>
+    			</li>
+
+    		</ul>
+        <a href="#" id="clearCanvas" class="navbar-brand"><span class="glyphicon glyphicon-erase" id="iconColorWhite" aria-hidden="true"></span></a>
+ 		</div>
+ 	</nav>
+	<div class="container-fluid">
+		<div class="row" id="main">
+
+			<!--Here we will create the left side of the page which will include the actual drawing application-->
+			<div class="col-md-8" id="left">
+				<div id="canvas" class="temporaryCanvasCSS text-center">
+          <canvas id="drawing"></canvas>
+				</div>
+			</div>
+
+			<!--Here we will create the right side of the page which should include the chat-->
+
+
+  <div class="col-md-3  well chat ">
+	<!-- Facebook share 				need to replace with link to pic  vvvvvvvvvvvvvv         -->
+     	<div class="fb-share-button" data-href="http://www.planwallpaper.com/static/images/da3w3eds.jpg" data-layout="button" data-size="large" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse">Share your pic on Facebook</a></div>
+	<!-- Facebook share -->
+        <div id="dragMe" class="panel panel-primary">
+            <div class="panel-heading">
+                <h4 class="room-title text-center"><!-- Room name (use jQuery) --></h4>
+            </div>
+            <div class="panel-body">
+                <div class="messages">
+                    <!-- Messages end up here! -->
+                </div>
+                <br>
+                <form id="message-form">
+                    <div class="form-group">
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                    <i class="glyphicon glyphicon-comment"></i>
+                                </span>
+                            <input type="text" name="message" placeholder="Message" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" class="btn btn-primary btn-block" />
+                    </div>
+                </form>
+                <div class="pannel-footer">
+                   {{!--  <a id="invite" href="/index.html" class="text-center">
+                        <p class="text-center">Invite a friend</p>
+                        <div class="fb-like" data-layout="standard" data-action="recommend" data-size="large" data-show-faces="true" data-share="true"></div>
+                    </a>
+ --}}
+
+
+    				<!-- Facebook invite -->
+ 					<div class="fb-share-button" data-href="https://young-scrubland-25157.herokuapp.com/index.html" data-layout="button" data-size="large" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fyoung-scrubland-25157.herokuapp.com%2Findex.html&amp;src=sdkpreparse">Invite a friend</a></div>
+					<!-- Facebook invite -->
+
+
+
+
+
+
+
+
+                    <a href="/">
+                        <p class="text-center">Exit Room</p>
+                    </a>
+                    <!--  Link should open new tab for email or SMS invite -->
+                </div>
+            </div>
+
+
+
+
+			<div class="col-md-3" id="right">
+				<div id="chat" class="temporaryChatCSS text-center">
+				</div>
+			</div>
+		</div>
+	</nav>
+
+	<footer class="footer navbar-fixed-bottom text-center" id="markFooter">
+		<div class="container">
+			<p>Mark the collaborative drawing application - Copyright 2016</p>
+		</div>
+	</footer>
+<input type="hidden" id="colorChanging" value="#000000">
+
+
+<script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
+
+<script type="text/javascript" src="javascript/chat.js"></script>
+<script type="text/javascript" src="javascript/client.js"></script>
+
+<script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
+<script src="/javascript/mark.js"></script>
+<script src="/javascript/moment.js"></script>
+<script src="/javascript/QueryParams.js"></script>
+<script src="/javascript/app.js"></script>
+<script src="/javascript/client.js"></script>
+
+<script type="text/javascript">
+$('#picker').on('mouseout', function(){
+  varThis = $('#colorChanging').val();
+  console.log(varThis);
+})
+</script>
+
+</body>
+</html>

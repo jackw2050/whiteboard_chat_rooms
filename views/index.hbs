@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Mark - Collaborate together!</title>
+
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+  <link rel="stylesheet" href="css/styleHome.css">
+	<link href="https://fonts.googleapis.com/css?family=Arimo" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Amatic+SC|Josefin+Sans|Righteous" rel="stylesheet">
+
+</head>
+<body>
+	<!-- This adds the video as the background -->
+	<div class="fullscreen-bg">
+	    <video loop muted autoplay poster="images/videoframe.jpg" class="fullscreen-bg__video">
+	        <source src="WEBM/Wall-Sketching.webm" type="video/webm">
+	        <source src="MP4/Wall-Sketching.mp4" type="video/mp4">
+	    </video>
+	</div>
+	<div class="container-fluid">
+		<div class="row" id="headerId">
+			<div class="col-md-12 text-center" id="headerMark">
+				<img src="images/mark.png" id="logoMark">
+			</div>
+		</div>
+	</div>
+
+	<br>
+	<!-- This is our main section -->
+	<div class="container" id="main">
+		<div class="row">
+			<div class="jumbotron text-center" id="jumboColor">
+				<span class="glyphicon glyphicon-pencil largeIcon"></span>
+				<h2>Welcome to Mark. The game changing application that allows you to draw
+				alongside your friends online. Play a game of pictionary or create some art,
+				the world is yours with Mark.</h2>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-12" id="joinRoom">
+				<div class="row">
+					<div class="col-md-3 text-center lighterBackground roundCorner">
+						<h3>Placeholder for Sign up button.</h3>
+						<button type="button" class="btn btn-success" data-toggle="modal" data-target="#signup">Sign up</button>
+					</div>
+					<div class="col-md-4 col-md-offset-1 text-center lighterBackground roundCorner">
+						<h3>Placeholder for Sign in button.</h3>
+						<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#login">Sign in</button>
+					</div>
+					<div class="col-md-3 col-md-offset-1 text-center lighterBackground roundCorner">
+						<h3>Here you will be able to join a room</h3>
+{{!-- 						<a href="index.html"><button type="button" class="btn btn-danger">Join a Room</button></a>
+ --}}
+ 						<button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#myModal">Sign in</button>
+
+
+
+
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<footer class="footer navbar-fixed-bottom text-center" id="markFooter">
+		<div class="container">
+			<p>Mark the collaborative drawing application - Copyright 2016</p>
+		</div>
+	</footer>
+  <!-- Login Modal -->
+  <div class="container">
+  <div class="modal fade" id="login" role="dialog">
+    <div class="modal-dialog">
+      <!-- Modal content -->
+       <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Login</h4>
+        </div>
+        <div class="modal-body">
+          <form action="/login" method="post">
+		          <div class="form-group">
+			             <label>Email</label>
+			                <input type="text" class="form-control" name="email">
+		          </div>
+		          <div class="form-group">
+			          <label>Password</label>
+			             <input type="password" class="form-control" name="password">
+		          </div>
+              <button type="submit" class="btn btn-warning btn-lg">Login</button>
+	        </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Register Modal -->
+<div class="container">
+<div class="modal fade" id="signup" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Sign Up!</h4>
+      </div>
+      <div class="modal-body">
+        <form action="/signup" method="post">
+		<div class="form-group">
+			<label>Email</label>
+			<input type="text" class="form-control" name="email">
+		</div>
+		<div class="form-group">
+			<label>Password</label>
+			<input type="password" class="form-control" name="password">
+		</div>
+		<button type="submit" class="btn btn-warning btn-lg">Signup</button>
+	</form>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Join room modal  -->
+
+            <div class="modal fade" id="myModal" role="dialog">
+<div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+{{!--         <div class="modal-header">
+            <div id="status">
+                <h4 class="text-center">Select a Room</h4>
+                </div>
+        </div> --}}
+        <div class="modal-body">
+        <h4 class="text-center">Select a Room</h4>
+            <div class="col-md-12">
+                <form>
+
+                    <div class="form-group">
+                        
+                        <div class="input-group">
+                            {{!-- <span class="input-group">
+                                            </span> --}}
+                            <div class="col-sm-6">
+                                <select class="form-control " id="mySelect">
+                                    <option value="Public Room 1">Public Room 1</option>
+                                    <option value="Public Room 2">Public Room 2</option>
+                                    <option value="Public Room 3">Public Room 3</option>
+                                    <option value="Private Room">Private Room</option>
+                                    <option value="Private Room">Join Private Room</option>
+                                </select>
+                            </div>
+                            <div class="col-sm-6">
+                                <input id="room_to_join" type="text" name="name_dummy" class="form-control" placeholder="Private room number">
+                            </div>
+
+
+
+                        </div>
+                        <!-- input-group -->
+                    </div>
+                    <!-- form-group -->
+                </form>
+            </div>
+        </div>
+        <!-- Open model button -->
+        <div class="modal-footer">
+
+            <form action="/profile">
+                <div class="form-group">
+                   {{!--  <h3>Join a room</h3> --}}
+                    {{!--    --}}
+                        <input id="screen_name" type="hidden" name="name" class="form-control" />
+                        <input id="room_name" type="hidden" name="room" class="form-control" />
+                         <button type="submit" value="Join Chat" class="btn btn-danger btn-block">Join Room</button>
+                                    
+                    </div>
+             </form>
+
+
+
+
+
+        </div>
+        <!-- Open model button -->
+    </div>
+    <!-- modal-content -->
+</div>
+<!-- modal-content -->
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+</body>
+<script src="/javascript/mark.js"></script>
+<script src="https://code.jquery.com/jquery-2.2.3.js" integrity="sha256-laXWtGydpwqJ8JA+X9x2miwmaiKhn8tVmOVEigRNtP4=" crossorigin="anonymous"></script>
+<script type="text/javascript" href="javascript/video.js"></script>
+</html>
